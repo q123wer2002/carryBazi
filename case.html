@@ -1,0 +1,62 @@
+<!DOCTYPE>
+<html>
+<header>
+	<title>Carrybazi</title>
+	<meta charset="utf-8">
+    
+	<link type="text/css" rel="stylesheet" href="css/layout.css"/>
+
+	<script src="js/angular.min.js"></script>
+	
+
+</header>
+<body ng-app='case'>
+	
+	<link type="text/css" rel="stylesheet" href="css/case.css"/>
+
+	<div class='header'>
+		
+	</div>
+	<div class='menu'>
+		
+    </div>
+
+    <div class='body' ng-controller='CaseController'>
+		<div class='title'>
+			<h1>{{title}}</h1>
+		</div>
+		<div ng-repeat='case in currentList'>
+			<div class='eachcase'>
+				<div class='aboutcase'>
+					<table>
+						<tr><td colspan=2><p>{{case.name}}</p></td></tr>
+						<tr>
+							<td><p>{{case.price | currency}}</p></td>
+							<td><p>{{case.owner}}</p></td>
+						</tr>
+					</table>
+				</div>
+				<div class='description'>
+					<p>{{case.description}}</p>
+				</div>
+			</div>
+		</div>
+		<div class='page'>
+			<div class='pageControl' ng-click="changePage('first')">第一頁</div>
+			<div class='pageControl' ng-click='changePage("prev")'>上一頁</div>
+			<div class='pageInfo'>{{pageCurrent}}</div>
+			<div class='pageControl' ng-click='changePage("next")'>下一頁</div>
+			<div class='pageControl' ng-click='changePage("last")'>最後一頁</div>
+			<div class='pageInfo'>{{pageMax()}}</div>
+		</div>
+	</div>
+
+    <div class='footer'>
+    	<div class='ourInfo'>about us</div>
+    </div>
+	
+	
+	<script src='js/app.js'></script>
+	<script src='js/controllers/CaseController.js'></script>
+</body>
+</html>
