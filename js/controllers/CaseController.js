@@ -166,21 +166,25 @@ function($scope) {
 	$scope.pageCurrent = 1;
     $scope.pagePageSize = 6;
 	
-    $scope.pageMax = function () { //取得最大頁數
+    $scope.pageMax = function () { 
         return Math.ceil($scope.cases.length / $scope.pagePageSize);};
 	
     $scope.changePage = function(aPageIndex) {
-        if(aPageIndex == 'next' && ($scope.pageCurrent < $scope.pageMax())) //判斷是否超過 MAX
-            $scope.pageCurrent+=1;
-        else if(aPageIndex == 'prev' && (parseInt($scope.pageCurrent) > 1))
-            $scope.pageCurrent-=1;
+        if(aPageIndex == 'next') {
+			if($scope.pageCurrent >= $scope.pageMax()) $scope.pageCurrent = $scope.pageMax();
+			else $scope.pageCurrent+=1;
+		}    
+        else if(aPageIndex == 'prev') {
+			if($scope.pageCurrent <= 1) $scope.pageCurrent = 1;
+			else $scope.pageCurrent-=1;
+		}
         else if(aPageIndex == 'last')
             $scope.pageCurrent = $scope.pageMax();
         else if(aPageIndex == 'first')
             $scope.pageCurrent = 1;
 		
 		$scope.currentList = [];
-		//避免爆表
+
 		var ii = Math.min($scope.pageCurrent * $scope.pagePageSize, $scope.cases.length);         
 		for (var i = ($scope.pageCurrent - 1) * $scope.pagePageSize; i < ii; i+=1) {
 			$scope.currentList.push($scope.cases[i]);

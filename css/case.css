@@ -37,7 +37,7 @@ table {
 	margin: 0px 30% 0px 30%;
 }
 
-.pageInfo, .pageControl {
+.pageControl, .pageInfo {
 	background: #0066FF ;
 	color: #fff;
 	cursor: pointer;
@@ -56,5 +56,8 @@ table {
 .pageInfo {
 	background: #FFFFFF ;
 	color: #000000;
+	cursor: context-menu;
 }
+
+
 
