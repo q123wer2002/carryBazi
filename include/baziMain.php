@@ -1,15 +1,10 @@
 <?php
 session_start();
 
-define('APP_PATH', str_replace('\\', '/', substr(dirname(__FILE__),0,strlen(dirname(__FILE__))-8 )));
-define('WEB_PATH',"http://".$_SERVER['SERVER_NAME']."/");
-define("PAGE_NAME", basename($_SERVER['PHP_SELF'],'.php'));
+include_once 'settingConfig.php';
 
-date_default_timezone_set("Asia/Taipei");
+header("Content-Type:text/html; charset=utf-8");
 
-include_once APP_PATH.'/include/DBConfig.php';
-include_once APP_PATH.'/include/function/pubilc_fun.php';
-include_once APP_PATH.'/include/function/db_fun.php';
-include_once APP_PATH.'/include/baziPhotoClass.php';
+$BPhotoObj = new BaziPhoto();
 
 ?>

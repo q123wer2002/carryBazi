@@ -3,7 +3,7 @@
 class  BaziPhoto{
   public $resultAry = array();
  
-  protected $isShowLayout=true;
+  protected $isShowLayout = true;
   protected $table_name;
   protected $tmp_order ='order by id asc';
   protected $tmp_id;
