@@ -150,7 +150,7 @@ class AdvancedChatServer implements MessageComponentInterface {
    */
   public function fetchMessages(ConnectionInterface $conn, $id = ""){
     if($id == ""){
-      $sql = $this->dbh->query("SELECT * FROM `wsAdvancedChat` ORDER BY `id` ASC");
+      $sql = $this->dbh->query("SELECT * FROM `carrybazi_talk` ORDER BY `id` ASC");
       $msgs = $sql->fetchAll();
       $msgCount = count($msgs);
 
