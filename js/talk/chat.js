@@ -49,9 +49,10 @@ window.connect = function(){
         
       },
       onliners: function(e){
-        $(".chatWindow .users").html('');
-        $.each(e.data, function(i, elem){
-          $(".chatWindow .users").append("<div class='user'>"+ elem +"</div>");
+        $(".chatDiv .UserList").html('');
+        $.each(e.data, function(userResourceID, userName){
+          $(".chatDiv .UserList").append("<a href='' title='go chatting'><li>"+ userName +"</li></a>");
+          //console.log(userResourceID);
         });
       },
       single: function(e){
