@@ -1,0 +1,41 @@
+<!-- import  -->
+
+<script src="http://lab.subinsb.com/projects/jquery/core/jquery-2.1.1.js"></script>
+<script src="http://lab.subinsb.com/projects/jquery/voice/recorder.js"></script>
+<script src="http://lab.subinsb.com/projects/jquery/voice/jquery.voice.min.js"></script>
+
+<script src="<?php echo WEB_PATH; ?>/js/talk/ws.js"></script>
+<script src="<?php echo WEB_PATH; ?>/js/talk/time.js"></script>
+<script src="<?php echo WEB_PATH; ?>/js/talk/chat.js"></script>
+
+<link href="<?php echo WEB_PATH; ?>/css/talk/chat.css" rel="stylesheet"/>
+
+<!-- content -->
+<div class="chatDiv">
+	<ul class="UserList">
+		<a href=""><li>qwd</li></a>
+		<a href=""><li>qwd</li></a>
+		<a href=""><li>qwd</li></a>
+		<a href=""><li>qwd</li></a>
+		<a href=""><li>qwd</li></a>
+		<a href=""><li>qwd</li></a>
+		<a href=""><li>qwd</li></a>
+		<a href=""><li>qwd</li></a>
+		<a href=""><li>qwd</li></a>
+		<a href=""><li>qwd</li></a>
+		<a href=""><li>qwd</li></a>
+		<a href=""><li>qwd</li></a>
+	</ul>
+	<div class="chatWindow">
+		<div style="display: none;postion: absolute;">
+			<input type="file" id="photoFile" accept="image/*" />
+		</div>
+		<div class="chat">
+			<div class="msgs"></div>
+			<form id="msgForm">
+				<textarea name="msg" placeholder="Type message here...."></textarea>
+				<a class="button" id="photo" title="Type in a message and choose image to send"></a>
+			</form>
+		</div>
+	</div>
+</div>

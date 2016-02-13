@@ -1,0 +1,36 @@
+[file_prefs]
+final_new_line=true
+ensure_convert_new_lines=false
+strip_trailing_spaces=false
+replace_tabs=false
+
+[indentation]
+indent_width=2
+indent_type=0
+indent_hard_tab_width=8
+detect_indent=false
+detect_indent_width=false
+indent_mode=1
+
+[project]
+name=Advanced Chat - Websocket
+base_path=/home/simsu/Other/projects/Web/Demos/local/php/advanced-chat-websocket
+description=
+
+[long line marker]
+long_line_behaviour=1
+long_line_column=72
+
+[files]
+current_page=7
+FILE_NAME_0=0;None;0;EUTF-8;0;1;1;%2Fvar%2Flog%2Fapache2%2Fprojects%2Ferror.log;0;2
+FILE_NAME_1=620;PHP;0;EUTF-8;0;1;1;%2Fhome%2Fsimsu%2FOther%2Fprojects%2FWeb%2FDemos%2Flocal%2Fcss%2Fnotebook%2Findex.php;0;2
+FILE_NAME_2=41;Javascript;0;EUTF-8;0;1;1;%2Fhome%2Fsimsu%2FOther%2Fprojects%2FWeb%2FDemos%2Flocal%2Fcss%2Fnotebook%2Fjs%2Fscript.js;0;2
+FILE_NAME_3=184;PHP;0;EUTF-8;0;1;1;%2Fhome%2Fsimsu%2FOther%2Fprojects%2FWeb%2FDemos%2Flocal%2Finc%2Fload.php;0;2
+FILE_NAME_4=0;PHP;0;EUTF-8;0;1;1;%2Fhome%2Fsimsu%2FOther%2Fprojects%2FWeb%2FDemos%2Flocal%2Finc%2Ftop.php;0;2
+FILE_NAME_5=40;CSS;0;EUTF-8;0;1;1;%2Fhome%2Fsimsu%2FOther%2Fprojects%2FWeb%2FDemos%2Flocal%2Fcss%2Fnotebook%2Fcss%2Fstyle.css;0;2
+FILE_NAME_6=0;PHP;0;EUTF-8;0;1;1;%2Fhome%2Fsimsu%2FOther%2Fprojects%2FWeb%2FOpen%2Flocal%2Fconfig.php;0;2
+FILE_NAME_7=0;PHP;0;EUTF-8;0;1;1;%2Fhome%2Fsimsu%2FOther%2Fprojects%2FWeb%2FOpen%2Flocal%2Findex.php;0;2
+
+[VTE]
+last_dir=/home/simsu

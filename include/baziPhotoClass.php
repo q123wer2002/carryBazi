@@ -49,8 +49,6 @@ class  BaziPhoto{
   //  指定輸出html
   function showHTML($htmlPageName)
   {
-    $this->resultAry=$this->laout_change_lang($this->resultAry);
-
     if($this->isShowLayout == true)
       include_once 'templates/'.$htmlPageName;
     else
