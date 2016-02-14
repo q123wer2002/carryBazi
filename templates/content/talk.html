@@ -11,6 +11,10 @@
 <link href="<?php echo WEB_PATH; ?>/css/talk/chat.css" rel="stylesheet"/>
 
 <!-- content -->
+<div class="enterChatRoom">
+	<input type="text" id="myName" placeholder="Enter your name" value="<?php echo $this->myName; ?>" />
+	<input type="button" id="btnEnter" value="Go Chat" />
+</div>
 <div class="chatDiv">
 	<ul class="UserList">
 		<li>No User online</li>

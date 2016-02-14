@@ -51,16 +51,16 @@ window.connect = function(){
       onliners: function(e){
         $(".chatDiv .UserList").html('');
         $.each(e.data, function(userResourceID, userName){
-          $(".chatDiv .UserList").append("<a href='' title='go chatting'><li>"+ userName +"</li></a>");
+          $(".chatDiv .UserList").append("<a href='?receiver=" + userName + "' title='go chatting'><li>"+ userName +"</li></a>");
           //console.log(userResourceID);
         });
       },
       single: function(e){
         elem = e.data;
-        attachmentURL = typeof elem.file_name != "undefined" ? window.location.href + "uploads/" + elem.file_name : "";
-        
+        attachmentURL = typeof elem.content != "undefined" ? window.location.protocol + "//" + window.location.host + "/github/carryBazi_photo/images/talk/uploads/" + elem.content : "";
+        console.log(e);
         if(elem.type == "text"){
-          html = "<div class='msg' id='"+ elem.id +"'><div class='name'>"+ elem.name.substring(0, 1) +"</div><div class='msgc'><div>"+ elem.msg.linkify() +"</div><div class='posted'><span class='timeago'>"+ elem.posted +"</span> by "+ elem.name +"</div></div></div>";
+          html = "<div class='msg' id='"+ elem.id +"'><div class='name'>"+ elem.receiver +"</div><div class='msgc'><div>"+ elem.content +"</div><div class='posted'><span class='timeago'>"+ elem.posted +"</span> by "+ elem.sneder +"</div></div></div>";
           
           if(typeof elem.append != "undefined"){
             $(".msgs .msg:last").remove();
@@ -74,20 +74,13 @@ window.connect = function(){
             $(".chatWindow .chat .msgs .msg:first").before(html);
           }
         }else if(elem.type == "img"){
-          html = "<div class='msg' id='"+ elem.id +"'><div class='name'>"+ elem.name.substring(0, 1) +"</div><div class='msgc'><div>"+ elem.msg.linkify() +"</div><div class='extra'><a target='_blank' href='"+ attachmentURL +"'><img src='"+ attachmentURL +"' /></a></div><div class='posted'><span class='timeago'>"+ elem.posted +"</span> by "+ elem.name +"</div></div></div>";
+          console.log(attachmentURL);
+          html = "<div class='msg' id='"+ elem.id +"'><div class='name'>"+ elem.receiver +"</div><div class='msgc'><div>"+ elem.content +"</div><div class='extra'><a target='_blank' href='"+ attachmentURL +"'><img src='"+ attachmentURL +"' /></a></div><div class='posted'><span class='timeago'>"+ elem.posted +"</span> by "+ elem.sneder +"</div></div></div>";
           
-          $(".chatWindow .chat .msgs").append(html);
-          scrollToBottom();
-        }else if(elem.type == "audio"){
-          html = "<div class='msg' id='"+ elem.id +"'><div class='name'>"+ elem.name.substring(0, 1) +"</div><div class='msgc'><div>"+ elem.msg.linkify() +"</div><div class='extra'><audio controls='controls' src=\""+ attachmentURL +"\"></audio></div><div class='posted'><span class='timeago'>"+ elem.posted +"</span> by "+ elem.name +"</div></div></div>";
-
           $(".chatWindow .chat .msgs").append(html);
           scrollToBottom();
         }else if(elem.type == "more_messages"){
           $(".chatWindow .chat .msgs .msg:first").before("<a id='load_earlier_messages'>Load Earlier Messages...</a>");
-        }
-        if(window.user != elem.name){
-          $(".chatWindow #notification")[0].play();
         }
         Fr.timeago();
       },
@@ -103,13 +96,50 @@ window.connect = function(){
             });
           });
         }
+      },
+      finishOpen : function(e){
+        if(e.data == "doRegistering"){
+          var myName = $(".enterChatRoom #myName").val();
+          if( myName != "" ){
+            $(".enterChatRoom").css('display','none');
+            $(".chatDiv").css('display','block');
+            
+            var receiver = $(".chatWindow #receiver").val();
+            ws.send("register", {"name": myName, "receiver": receiver});
+          }
+        }
       }
     }
   });
 };
 
 $(document).ready(function(){
+  //websocket connect
   connect();
+
+  $(".enterChatRoom #btnEnter").on("click", function(){
+    var myName = $(".enterChatRoom #myName").val();
+    if( myName != "" ){
+      //layout show or hide
+      $(".enterChatRoom").css('display','none');
+      $(".chatDiv").css('display','block');
+      var loginObj = {"action" : "login", "myName": myName};
+      //login chatroom
+      $.ajax({
+        url: "server/talkUpload.php",
+        type: "POST",
+        data: $.param(loginObj),
+        success: function(result) {
+          console.log(result);
+          if(result != ""){
+            var receiver = $(".chatWindow #receiver").val();
+            ws.send("register", {"name": myName, "receiver": receiver});
+          }
+        }
+      });
+      
+    }
+  });
   
   $(document).on("click", "#load_earlier_messages", function(){
     ws.send("fetch", {"id" : $(".msgs .msg:first").attr("id")});
@@ -137,14 +167,16 @@ $(document).ready(function(){
     e.preventDefault();
     var form = $(this);
     var val   = $(this).find("textarea").val();
+    //receiver name
+    var receiver = $(".chatWindow #receiver").val();
     
     if(val != ""){
-      ws.send("send", {"type" : "text", "msg": val});
+      ws.send("send", {"type" : "text", "receiver": receiver, "msg": val});
       form[0].reset();
     }
   });
 
-  $(".chatWindow .login #loginForm").on("submit", function(e){
+  /*$(".chatWindow .login #loginForm").on("submit", function(e){
     e.preventDefault();
     var val  = $(this).find("input[type=text]").val();
     
@@ -154,7 +186,7 @@ $(document).ready(function(){
     }else{
       alert("Come on, type in a name");
     }
-  });
+  });*/
   
   $(".chatWindow #status").on("click", function(){
     if($(this).text() == "Offline"){
@@ -203,11 +235,12 @@ $(document).ready(function(){
         success: function(result) {
           $("#msgForm").css({background : ""});
           val  = $("#msgForm").find("textarea").val();
+          var receiver = $(".chatWindow #receiver").val();
           if(result != ""){
-            ws.send("send", {"type" : "img", "msg" : val, "file_name" : result});
+            ws.send("send", {"type" : "img","receiver" : receiver, "msg" : val, "file_name" : result});
             $("#msgForm").find("textarea").val('');
           }
-          console.log("ok");
+          console.log(result);
         }
       });
     }

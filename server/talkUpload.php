@@ -1,4 +1,7 @@
 <?php
+
+include_once "../include/baziMain.php";
+
 if(isset($_FILES['file'])){
   $file = file_get_contents($_FILES['file']['tmp_name']);
   $f = finfo_open();
@@ -20,5 +23,16 @@ if(isset($_FILES['file'])){
     
     move_uploaded_file($_FILES['file']['tmp_name'], $location);
     echo $fileName;
+  }
+}else{
+  $action = $_POST['action'];
+  switch($action){
+    case "login":
+      $_SESSION['myName'] = $_POST['myName'];
+      echo "success";
+      exit;
+    break;
+    default:
+    break;
   }
 }

@@ -2,6 +2,10 @@
 
 include_once "include/baziMain.php";
 
+$BPhotoObj->myName = "";
+if(isset($_SESSION['myName'])){
+	$BPhotoObj->myName = $_SESSION['myName'];
+}
 
 $BPhotoObj->msgReceiver = "";
 if(isset($_GET['receiver'])){
