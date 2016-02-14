@@ -1,3 +1,17 @@
+.guide {	
+	width:100%;
+	height:100%;
+	display: block;
+	background: #33CCFF;
+}
+.guide div{
+	width:25%;
+	height:80%;
+	border: solid 1px #ffffff;
+	display: inline-block;
+	margin: 5% -2.5% 0 7.5%;
+}
+
 .first{
 	width:100%;
 	height:100%;
@@ -90,42 +104,37 @@
 }
 .third .third_show{
 	width:100%;
-	background: #33CC33;
 }
-.third .third_show .show_container{
-	width:80%;
-	margin-left: 10%;
-	background: red;
-}
-.third .third_show .show_container div{
-	background: #ffffff;
+
+.third .third_show div{
+	background: #000000;
 	display: inline-block;
 	margin-top: 3%;
-	margin-right: 5%;
+	margin-left: 5%;
 
 }
 .third .third_show #top1_show{
-	width:65%;
+	width:58%;
 	min-width: 200px;
 	height: 40%;
 }
 .third .third_show #top2_show{
-	width:30%;
+	width:26.5%;
 	min-width: 100px;
 	height: 40%;
 }
 .third .third_show #top3_show{
-	width:30%;
+	width:26.5%;
 	min-width: 100px;
 	height: 40%;
 }
 .third .third_show #top4_show{
-	width:30%;
+	width:26.5%;
 	min-width: 100px;
 	height:40%;
 }
 .third .third_show #top5_show{
-	width:30%;
+	width:26.5%;
 	min-width: 100px;
 	height: 40%;
 }
@@ -135,9 +144,17 @@
 	display: block;
 	text-align: center;
 }
+.forth .forth_title{
+	width: 100%;
+	height: 10%;
+}
 .forth .forth_content{
 	width: 100%;
 	height: 80%;
 	background: url(../../images/home/background.jpg) no-repeat;
 	background-size: contain;
+}
+.forth .forth_slogan{
+	width: 100%;
+	height: 10%;
 }
