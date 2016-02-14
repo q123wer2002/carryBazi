@@ -1,7 +1,7 @@
-.chatDiv{width: 1024px;height: 500px;margin: auto;position: relative;}
+.chatDiv{width: 1024px;height: 500px;margin: auto;position: relative;display: none;}
 .chatDiv .UserList{width: 140px;height: 100%;background: #f14f30;overflow-y:auto;overflow-x:hidden;float: left;list-style: none;}
 .chatDiv .UserList li{width: 140px;margin-bottom: 2px;background: #194736;height: 50px;color: #ffffff;text-align: center;line-height: 50px;}
-.chatDiv .chatWindow{width: 524px;height: 100%;background: #eeeeee;display:inline-table;position: relative;}
+.chatDiv .chatWindow{width: 524px;max-height: 100%;background: #eeeeee;display:inline-table;position: relative;}
 
 .chatWindow #msgForm{
   position: absolute;
@@ -64,11 +64,6 @@
   height: inherit;
   background: #fff;
 }
-.chatWindow .chatbox .chat .msgs{
-  overflow-y: auto;
-  height: 300px;
-  margin-bottom: 30px;
-}
 .chatWindow .chatbox #msgForm{
   position: absolute;
   right: 0px;
@@ -114,6 +109,11 @@
   display: none;
 }
 */
+.chatWindow .chat .msgs{
+  overflow-y: auto;
+  height: 470px;
+  margin-bottom: 30px;
+}
 .msg{
   margin: 15px 5px;
   padding: 5px 0px;
