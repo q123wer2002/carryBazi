@@ -1,0 +1,40 @@
+.first .first_backgound{
+	width:100%;
+	height:100%;
+	background: url(../../images/home/background.jpg) no-repeat;
+	background-size: contain;
+	position: absolute;
+	z-index: -1;
+}
+.first .first_content .top_banner{
+	width:100%;
+	height:10%;
+	background-color: #000000;
+	margin: 0;
+	z-index: 5;
+}
+.first .first_content .top_banner .status{
+	float: left;
+}
+.first .first_content .top_banner .option{
+	float: right;
+}
+.first .first_content .top_banner .option a{
+	margin: 5px 5px;
+}
+.first .first_content .top_banner .option .photographer_in{
+	border: solid 1px #ffffff;
+	border-radius: 5px;
+}
+.first .first_content .va-middle{
+	width:100%;
+	height:10%;
+	text-align: center;
+	margin-top: 20%;
+}
+.first .first_content .va-middle .get_help{
+	border: solid 1px #000000;
+	border-radius: 5px;
+	padding: 5px 5px 5px 5px;
+	margin: 10px;
+}
