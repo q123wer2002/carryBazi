@@ -90,10 +90,19 @@
 	width:100%;
 	text-align: center;
 }
-.photographer .photographer_detail div{
+.photographer .photographer_detail .about_photographer{
 	background: blue;
 	width: 25%;
 	height: 60%;
 	margin-left: 5%;
+	margin-bottom: 5%;
+	display: inline-block;
+}
+.photographer .photographer_detail .photographer_project{
+	background: blue;
+	width: 25%;
+	height: 60%;
+	margin-left: 5%;
+	margin-bottom: 5%;
 	display: inline-block;
 }
