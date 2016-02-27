@@ -1,6 +1,6 @@
 <?php
 
-include_once "include/baziMain.php";
+include_once "checkSetting.php";
 
 
 $BPhotoObj->topHtml = "top.html";

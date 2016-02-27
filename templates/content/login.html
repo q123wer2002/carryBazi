@@ -1,0 +1,50 @@
+<!-- load specific js and css -->
+<link rel="stylesheet" type="text/css" href="css/login.css">
+<script type="text/javascript" src="js/AN_login.js"></script>
+
+<div class="LogInPage" ng-controller="BaziPhotoLogin">
+
+	<div class="limitWebView">
+
+		<div class="mainLogo"><img src="images/Logo.png"></div>
+
+		<div class="inputDiv">
+			<input class="inputType" type="text" placeholder="帳號" ng-model="user" ng-Enter="login()">
+		</div>
+
+		<div class="inputDiv">
+			<input class="inputType" type="password" placeholder="密碼" ng-model="password" ng-Enter="login()">
+		</div>
+
+		<div class="anotherLogin">
+			<h3>其他登入方式</h3>
+			<ul>
+				<a href="javascript:;">
+					<li title="facebook">
+						<span class="icon fb_icon"></span>
+						<p>Facebook</p>
+					</li>
+				</a>
+				<a href="javascript:;">
+					<li title="instagram">
+						<span class="icon ig_icon"></span>
+						<p>instagram</p>
+					</li>
+				</a>
+				<a href="javascript:;">
+					<li title="flickr">
+						<span class="icon fk_icon"></span>
+						<p>Flickr</p>
+					</li>
+				</a>
+			</ul>
+		</div>
+		
+		<div class="SubmitDiv">
+			<span class="szError">{{errorMsg}}</span>
+			<a href="javascript:;" class="buttonType" ng-click="login()">登入</a>
+		</div>
+
+	</div>
+
+</div>
