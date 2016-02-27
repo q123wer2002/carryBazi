@@ -1,16 +1,3 @@
-.guide {	
-	width:100%;
-	height:100%;
-	display: block;
-	background: #33CCFF;
-}
-.guide div{
-	width:25%;
-	height:80%;
-	border: solid 1px #ffffff;
-	display: inline-block;
-	margin: 5% -2.5% 0 7.5%;
-}
 
 .first{
 	width:100%;
@@ -18,35 +5,12 @@
 	display: block;
 	background: #FFCC99;
 }
-.first .first_content .top_banner{
-	width:100%;
-	height:10%;
-	background-color: #000000;
-	margin: 0;
-	z-index: 5;
-}
-.first .first_content .top_banner .status{
-	color: #ffffff;
-	float: left;
-}
-.first .first_content .top_banner .option{
-	float: right;
-}
-.first .first_content .top_banner .option a{
-	color: #ffffff;
-	margin: 10px 10px;
-	display: inline-block;
-}
-.first .first_content .top_banner .option .photographer_in{
-	border: solid 1px #ffffff;
-	border-radius: 5px;
-	padding: 2px 2px 2px 2px;
-}
+
 .first .first_content .va-middle{
 	width:100%;
 	height:10%;
 	text-align: center;
-	margin-top: 20%;
+	padding-top: 50px;
 }
 .first .first_content .va-middle .get_help{
 	border: solid 1px #000000;

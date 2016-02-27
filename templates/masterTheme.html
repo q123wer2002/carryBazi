@@ -1,9 +1,20 @@
 <!DOCTYPE>
-<html>
+<html ng-app='BaziPhoto'>
 <head>
-	<?php include_once $this->topHtml; ?>
+	<?php include_once $this->metaHtml; ?>
+	
+	<title>CARRYBAZI TALK</title>
+
+	<link rel="stylesheet" type="text/css" href="css/layout.css">
+
+	<script type="text/javascript" src="js/lib/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="js/lib/angular.js"></script>
+	<script type="text/javascript" src="js/layout.js"></script>
+
+
 </head>
 <body>
+	<?php include_once $this->topHtml; ?>
 	<?php include_once $this->contentHtml; ?>
 	<?php include_once $this->footerHtml; ?>
 </body>
