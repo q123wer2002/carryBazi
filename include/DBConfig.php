@@ -2,7 +2,7 @@
 
 $dbHost = "localhost";
 $dbUser = "root";
-$dbPass = "";
+$dbPass = "1234";
 $dbData = "test";
 
 

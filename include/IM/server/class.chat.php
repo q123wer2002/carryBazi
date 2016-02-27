@@ -28,21 +28,23 @@ class AdvancedChatServer implements MessageComponentInterface {
     if(isset($data['data']) && count($data['data']) != 0){
       $type = $data['type'];
       $user = isset($this->users[$id]) ? $this->users[$id] : false;
-      $receiver = ($data['data']['receiver'] != "") ? $data['data']['receiver'] : false;
+      $receiver = (isset($data['data']['receiver']) && $data['data']['receiver'] != "") ? $data['data']['receiver'] : false;
       
       if($type == "register"){
         $name = htmlspecialchars($data['data']['name']);
         if(array_search($name, $this->users) === false){
           $this->users[$id] = $name;
           $this->send($conn, "register", "success");
-          
-          $this->fetchMessages($conn, $name);
+
+          if($receiver){
+            $this->fetchMessages($conn, $name, $receiver);
+          }
           $this->checkOnliners($conn);
         }else{
           $this->send($conn, "register", "taken");
         }
       }elseif($type == "send" && isset($data['data']['type']) && $user !== false && $receiver !== false){
-        $msg = htmlspecialchars($data['data']['msg']);
+        @$msg = htmlspecialchars($data['data']['msg']);
         
         /*
          * The base64 value of Audio Or Image
@@ -54,43 +56,20 @@ class AdvancedChatServer implements MessageComponentInterface {
         }
         
         if($data['data']['type'] == "text"){
-            /*$sql = $this->dbh->prepare("SELECT `id`, `sender`, `receiver`, `type`, `content`, `postDate` FROM `carrybazi_talk` WHERE `sender`='".$user."' and `receiver`='".$receiver."' ORDER BY `id` DESC LIMIT 1");
-            $sql->execute();
-            $lastMsg = $sql->fetch(PDO::FETCH_ASSOC);
-
-            if($lastMsg['sender'] == $user && $lastMsg['type'] == "text"){
-              // Append message
-              $msg = $lastMsg['content'] . "<br/>" . $msg;
-              
-              $sql = $this->dbh->prepare("UPDATE `carrybazi_talk` SET `content` = ?, `postDate` = NOW() WHERE `id` = ?");
-              $sql->execute(array($msg, $lastMsg['id']));
-              
-              $id = $this->dbh->query("SELECT `id` FROM `carrybazi_talk` ORDER BY `id` DESC LIMIT 1")->fetchColumn();
-              $resultAry = array(
-                "id" => $id,
-                "name" => $user,
-                "type" => "text",
-                "msg" => $msg,
-                "posted" => date("Y-m-d H:i:s"),
-                "append" => true
-              );
-            }else{*/
             $sql = $this->dbh->prepare("INSERT INTO `carrybazi_talk` (`sender`, `receiver`, `type`, `content`, `postDate`) VALUES(?, ?, ?, ?, NOW())");
             $sql->execute(array($user, $receiver, "text", $msg));
             
             $id = $this->dbh->query("SELECT `id` FROM `carrybazi_talk` ORDER BY `id` DESC LIMIT 1")->fetchColumn();
             $resultAry = array(
               "id" => $id,
-              "sneder" => $user,
+              "sender" => $user,
               "receiver" => $receiver,
               "type" => "text",
               "content" => $msg,
               "posted" => date("Y-m-d H:i:s")
             );
-
-          //}
         }elseif($data['data']['type'] == "img"){
-          echo "here is Photo";
+          //echo "here is Photo";
           $uploaded_file_name = $data['data']['file_name'];
           $sql = $this->dbh->prepare("INSERT INTO `carrybazi_talk` (`sender`, `receiver`, `type`, `content`, `postDate`) VALUES(?, ?, ?, ?, NOW())");
           $sql->execute(array($user, $receiver, "img", $uploaded_file_name));
@@ -99,7 +78,7 @@ class AdvancedChatServer implements MessageComponentInterface {
           
           $resultAry = array(
             "id" => $id,
-            "sneder" => $user,
+            "sender" => $user,
             "receiver" => $receiver,
             "type" => "img",
             "content" => $uploaded_file_name,
@@ -108,22 +87,23 @@ class AdvancedChatServer implements MessageComponentInterface {
         }
         
         //server only push the last msg to receiver
+        $this->send($conn, "single", $resultAry);
+
         foreach($this->users as $eachUserID => $eachUserName){
           if( $eachUserName == $receiver ){
             $receicerCon = $this->clients[$eachUserID];
-            $this->send($receicerCon, "single", $resultAry);
+            //push notification
+            $this->send($receicerCon, "readYet", $resultAry);
             break;
           }
         }
-        
 
-      }elseif($type == "onliners"){
-        $this->checkOnliners($conn);
       }elseif($type == "fetch"){
-        /**
-         * Fetch previous messages
-         */
-        $this->fetchMessages($conn, $data['data']['id']);
+        //Fetch all previous messages
+        $this->fetchMessages($conn, $user, $receiver, "more");
+      }elseif($type == "getTalking"){
+        //get the last talking
+        $this->fetchMessages($conn, $user, $receiver, "");
       }
     }
   }
@@ -147,9 +127,10 @@ class AdvancedChatServer implements MessageComponentInterface {
   /**
    * My custom functions
    */
-  public function fetchMessages(ConnectionInterface $conn, $name = ""){
-    if($name != ""){
-      $sql = $this->dbh->query("SELECT * FROM `carrybazi_talk` WHERE `receiver`='".$name."' ORDER BY `id` ASC");
+  public function fetchMessages(ConnectionInterface $conn, $name = "", $receiver = "", $msgCmd = ""){
+    if($msgCmd == ""){
+      $sql = $this->dbh->query("
+        SELECT * FROM `carrybazi_talk` WHERE (`receiver`='".$name."' AND `sender`='".$receiver."') OR (`receiver`='".$receiver."' AND `sender`='".$name."') ORDER BY `id` ASC");
       $msgs = $sql->fetchAll();
       $msgCount = count($msgs);
 
@@ -160,7 +141,33 @@ class AdvancedChatServer implements MessageComponentInterface {
       foreach($msgs as $msg){
         $resultAry = array(
           "id" => $msg['id'],
-          "sneder" => $msg['sender'],
+          "sender" => $msg['sender'],
+          "receiver" => $msg['receiver'],
+          "type" => $msg['type'],
+          "content" => $msg['content'],
+          "posted" => $msg['postDate']
+        );
+        $this->send($conn, "fetchMessage", $resultAry);
+      }
+      if($msgCount > 5){
+
+        $resultAry = array(
+          "sender" => "SYS_ServerPush",
+          "receiver" => "SYS_Client",
+          "type" => "more_messages",
+        );
+        $this->send($conn, "single", $resultAry);
+      }
+    }
+    else{
+      $sql = $this->dbh->query("
+        SELECT * FROM `carrybazi_talk` WHERE (`receiver`='".$name."' AND `sender`='".$receiver."') OR (`receiver`='".$receiver."' AND `sender`='".$name."') ORDER BY `id` ASC");
+      $msgs = $sql->fetchAll();
+    
+      foreach($msgs as $msg){
+        $resultAry = array(
+          "id" => $msg['id'],
+          "sender" => $msg['sender'],
           "receiver" => $msg['receiver'],
           "type" => $msg['type'],
           "content" => $msg['content'],
@@ -168,37 +175,7 @@ class AdvancedChatServer implements MessageComponentInterface {
         );
         $this->send($conn, "single", $resultAry);
       }
-      if($msgCount > 5){
-        $this->send($conn, "single", array(
-          "type" => "more_messages"
-        ));
-      }
-    }/*else{
-      $sql = $this->dbh->prepare("SELECT * FROM `carrybazi_talk` WHERE `id` < :id ORDER BY `id` DESC LIMIT 10");
-      $sql->bindParam(":id", $id, PDO::PARAM_INT);
-      $sql->execute();
-      
-      $msgs = $sql->fetchAll();
-      foreach($msgs as $msg){
-        $resultAry = array(
-          "id" => $msg['id'],
-          "name" => $msg['user'],
-          "type" => $msg['type'],
-          "msg" => $msg['msg'],
-          "posted" => $msg['posted'],
-          "earlier_msg" => true
-        );
-        $this->send($conn, "single", $resultAry);
-      }
-
-      sort($msgs);
-      $firstID = $msgs[0]['id'];
-      if($firstID != "1"){
-        $this->send($conn, "single", array(
-          "type" => "more_messages"
-        ));
-      }
-    }*/
+    }
   }
   
   public function checkOnliners(ConnectionInterface $conn){    
@@ -220,7 +197,7 @@ class AdvancedChatServer implements MessageComponentInterface {
     $client->send($send);
   }
 
-  public function finishOpen(ConnectionInterface $conn){    
+  public function finishOpen(ConnectionInterface $conn){
     /**
      * Send finish Event to current user
      */

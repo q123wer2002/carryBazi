@@ -1,35 +1,83 @@
 <!-- import  -->
 
-<script src="http://lab.subinsb.com/projects/jquery/core/jquery-2.1.1.js"></script>
-<script src="http://lab.subinsb.com/projects/jquery/voice/recorder.js"></script>
-<script src="http://lab.subinsb.com/projects/jquery/voice/jquery.voice.min.js"></script>
-
-<script src="<?php echo WEB_PATH; ?>/js/talk/ws.js"></script>
-<script src="<?php echo WEB_PATH; ?>/js/talk/time.js"></script>
-<script src="<?php echo WEB_PATH; ?>/js/talk/chat.js"></script>
-
+<script type="text/javascript" src="<?php echo WEB_PATH; ?>/js/lib/angular-websocket.js"></script>
+<script type="text/javascript" src="<?php echo WEB_PATH; ?>/js/talk/AN_chatRoom.js"></script>
 <link href="<?php echo WEB_PATH; ?>/css/talk/chat.css" rel="stylesheet"/>
 
 <!-- content -->
-<div class="enterChatRoom">
-	<input type="text" id="myName" placeholder="Enter your name" value="<?php echo $this->myName; ?>" />
-	<input type="button" id="btnEnter" value="Go Chat" />
-</div>
-<div class="chatDiv">
-	<ul class="UserList">
-		<li>No User online</li>
-	</ul>
-	<div class="chatWindow">
-		<div style="display: none;postion: absolute;">
-			<input type="file" id="photoFile" accept="image/*" />
-			<input type="text" id="receiver" value="<?php echo $this->msgReceiver; ?>">
+<div ng-controller="BaziPhotoChatting">
+	<a href="chatEachOther.php" id="backToChatHome">回首頁</a>
+	<input type="hidden" ng-init="myName = '<?php echo $this->myName; ?>'">
+	<input type="hidden" ng-init="isUserLogin()">
+	
+	<div class="enterChatRoom" ng-hide="isLogin">
+		<h1>請輸入暱稱後進入 CarrryBazi 聊天室</h1>
+		<input type="text" id="myName" placeholder="請輸入暱稱" ng-model="myName" />
+		<br>
+		<span>{{errorMsg}}</span>
+		<br>	
+		<input type="button" id="btnEnter" value="聊天去" ng-click="goChatting()" />
+	</div>
+	
+	<div class="chatDiv" ng-show="isLogin">
+		<ul class="UserList">
+			<a href="javascript:;" ng-repeat="user in userLists" ng-click="talkTo(user);">
+				<li id='targetUser'>
+					<div class="noReadMsg" ng-if="user.numOfNoReadMsg != 0">{{user.numOfNoReadMsg}}</div>
+					<span class="onlineUser" ng-if="user.isOnline">{{user.name}}</span>
+					<span ng-if="!user.isOnline">{{user.name}}</span>
+				</li>
+			</a>
+		</ul>
+
+		<div class="chatWindow">
+			<div style="display: none;postion: absolute;">
+				<input type="file" id="photoFile" accept="image/*" file-on-change="sendPhoto" multiple>
+			</div>
+			<div class="chat">
+				<div class="msgs">
+					<div id="msgDiv">
+						<div ng-repeat="msg in messages" ng-show="messages.length != ''">
+							<div id="btnMoreMsg" ng-if="msg.type=='more_messages'" ng-click="btnMoreMsg_Click()">
+								<span>more_messages</span>
+							</div>
+							<div class='msg leftMsg' id='msg.id' ng-show="msg.receiver==myName">
+								<div class='msgc'>
+									<div ng-if="msg.type=='text'" >{{msg.content}}</div>
+									<a ng-if="msg.type=='img'" target='_blank' href='images/talk/uploads/{{msg.content}}'>
+										<img ng-src='images/talk/uploads/{{msg.content}}' />
+									</a>
+									<div class='posted'>
+										<span class='timeago'>{{msg.posted}}</span>
+									</div>
+								</div>
+							</div>
+							<div class='msg rightMsg' id='msg.id' ng-show="msg.sender==myName">
+								<div class='msgc'>
+									<div ng-if="msg.type=='text'" >{{msg.content}}</div>
+									<a ng-if="msg.type=='img'" target='_blank' href='images/talk/uploads/{{msg.content}}'>
+										<img ng-src='images/talk/uploads/{{msg.content}}' />
+									</a>
+									<div class='posted'>
+										<span class='timeago'>{{msg.posted}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div ng-show="receiver == ''" style="text-align: center;">
+							<span>Choose one user to get talking</span>
+						</div>
+						<div ng-show="messages.length == 0 && receiver != ''" style="text-align: center;">
+							<span>Say hello to get your first talk with {{receiver}}</span>
+						</div>
+					</div>
+				</div>
+				<form id="msgForm"  ng-enter="sendMsg()">
+					<textarea name="msg" placeholder="Type message here...." ng-model="messageInput"></textarea>
+					<a href="javascript:$('#photoFile').click();" class="button" id="photo" title="Type in a message and choose image to send"></a>
+				</form>
+			</div>
 		</div>
-		<div class="chat">
-			<div class="msgs"></div>
-			<form id="msgForm">
-				<textarea name="msg" placeholder="Type message here...."></textarea>
-				<a class="button" id="photo" title="Type in a message and choose image to send"></a>
-			</form>
-		</div>
+
 	</div>
 </div>
