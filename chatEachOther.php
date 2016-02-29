@@ -8,7 +8,7 @@ if(isset($_SESSION['myName'])){
 }
 		
 
-$BPhotoObj->topHtml = "top.html";
+$BPhotoObj->topHtml = "";
 $BPhotoObj->contentHtml = "content/talk.html";
 $BPhotoObj->footerHtml = "footer.html";
 $BPhotoObj->showHTML("masterPage.html");

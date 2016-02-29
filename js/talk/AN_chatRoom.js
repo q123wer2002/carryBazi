@@ -252,5 +252,14 @@ BaziPhoto.controller('BaziPhotoChatting',['$scope','$http', '$interval', '$timeo
     });
   }
 
+  $scope.showImgView = function( imgSrc ){
+    $scope.ViewImgSrc = "images/talk/uploads/" + imgSrc;
+    console.log($scope.ViewImgSrc);
+    jQuery('.blackBG').css({'display':'block'});
+  }
+  $scope.clearImgView = function(){
+    jQuery('.blackBG').css({'display':'none'});
+  }
+
 }]);
 

@@ -34,6 +34,11 @@
 			<div style="display: none;postion: absolute;">
 				<input type="file" id="photoFile" accept="image/*" file-on-change="sendPhoto" multiple>
 			</div>
+			<div class="blackBG" ng-click="clearImgView()">
+				<div class="imgView">
+					<img src="{{ViewImgSrc}}">
+				</div>
+			</div>
 			<div class="chat">
 				<div class="msgs">
 					<div id="msgDiv">
@@ -44,7 +49,7 @@
 							<div class='msg leftMsg' id='msg.id' ng-show="msg.receiver==myName">
 								<div class='msgc'>
 									<div ng-if="msg.type=='text'" >{{msg.content}}</div>
-									<a ng-if="msg.type=='img'" target='_blank' href='images/talk/uploads/{{msg.content}}'>
+									<a ng-if="msg.type=='img'" target='_blank' href='javascript:;' ng-click="showImgView(msg.content)">
 										<img ng-src='images/talk/uploads/{{msg.content}}' />
 									</a>
 									<div class='posted'>
@@ -55,7 +60,7 @@
 							<div class='msg rightMsg' id='msg.id' ng-show="msg.sender==myName">
 								<div class='msgc'>
 									<div ng-if="msg.type=='text'" >{{msg.content}}</div>
-									<a ng-if="msg.type=='img'" target='_blank' href='images/talk/uploads/{{msg.content}}'>
+									<a ng-if="msg.type=='img'" target='_blank' href='javascript:;' ng-click="showImgView(msg.content)">
 										<img ng-src='images/talk/uploads/{{msg.content}}' />
 									</a>
 									<div class='posted'>
