@@ -46,3 +46,48 @@ a{text-decoration: none;}
 	border-radius: 3px;
 	padding: 10px 7px;
 }
+
+.foot_banner{
+	width:90%;
+	padding:10px 5%;
+	height:100px;
+	background-color: #000000;
+	margin: 0;
+	z-index: 5;
+	text-align: center;
+}
+.foot_banner .option {
+
+}
+.foot_banner .option a{
+	color: #ffffff;
+	margin: 10px 10px;
+	display: inline-block;
+	
+}
+.foot_banner .option #news,#contract,#common_problem,#manual {
+	padding-left: 20px;
+	border-left: solid 1px #ffffff;
+}
+.foot_banner .like h3, a{
+	color: #ffffff;
+	margin: 10px 10px;
+	display: inline-block;
+}
+.foot_banner .like a{
+	width:20px;
+	height:20px;
+	border-radius: 10px;
+}
+.foot_banner .like #facebook{
+	background-color: #3333CC;
+
+}
+.foot_banner .like #Instagram{
+	background-color: #CC3333;
+
+}
+.foot_banner .like #twitter{
+	background-color: #00CC33;
+
+}
