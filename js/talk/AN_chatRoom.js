@@ -1,7 +1,7 @@
 
 BaziPhoto.factory('SocketData', function($websocket) {
   // Open a WebSocket connection
-  var ws = $websocket('ws://localhost:8000');
+  var ws = $websocket('ws://192.168.1.32:8000');
   
   var serverPushMsg = [];
   

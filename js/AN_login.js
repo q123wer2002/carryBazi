@@ -1,7 +1,8 @@
 
 BaziPhoto.controller('BaziPhotoLogin',['$scope','$http', '$interval', '$timeout', function BaziPhotoChatting($scope,$http,$interval,$timeout){
 
-	$scope.login = function(){
+	$scope.login = function()
+	{
 		//userName, password
 		var loginObj = { "method":"login" };
 		$http({
@@ -11,6 +12,7 @@ BaziPhoto.controller('BaziPhotoLogin',['$scope','$http', '$interval', '$timeout'
 			headers: {'Content-type': 'application/x-www-form-urlencoded'},
 		}).
 		success(function(json){
+			//console.log(json);
 			if(json.result == "success"){
 				location.reload();
 			}
