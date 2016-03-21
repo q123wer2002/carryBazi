@@ -3,8 +3,10 @@ BaziPhoto.controller('BaziPhotoLogin',['$scope','$http', '$interval', '$timeout'
 
 	$scope.login = function()
 	{
+		$scope.user = "test@carrybazi.com.tw";
+		$scope.password = "123456";
 		//userName, password
-		var loginObj = { "method":"login" };
+		var loginObj = { "method":"login", "userEmail":$scope.user, "userPwd":$scope.password};
 		$http({
 			method:'POST',
 			url:'server/accountAjax.php',
@@ -12,7 +14,7 @@ BaziPhoto.controller('BaziPhotoLogin',['$scope','$http', '$interval', '$timeout'
 			headers: {'Content-type': 'application/x-www-form-urlencoded'},
 		}).
 		success(function(json){
-			//console.log(json);
+			console.log(json);
 			if(json.result == "success"){
 				location.reload();
 			}

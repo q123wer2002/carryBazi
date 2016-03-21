@@ -3,7 +3,7 @@
 $dbHost = "localhost";
 $dbUser = "root";
 $dbPass = "1234";
-$dbData = "test";
+$dbData = "carry_photo";
 
 
 @$conn=mysql_connect($dbHost,$dbUser,$dbPass);

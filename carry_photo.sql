@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主機: 127.0.0.1
--- 產生時間： 2016-03-13 10:08:54
+-- 產生時間： 2016-03-21 15:51:15
 -- 伺服器版本: 10.1.9-MariaDB
 -- PHP 版本： 5.5.30
 
@@ -51,6 +51,13 @@ CREATE TABLE `carrybazi_user` (
   `registerDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- 資料表的匯出資料 `carrybazi_user`
+--
+
+INSERT INTO `carrybazi_user` (`id`, `account`, `password`, `usertype`, `registertype`, `registerDate`) VALUES
+(1, 'test@carrybazi.com.tw', '123456', 1, '1', '2016-03-21 14:39:45');
+
 -- --------------------------------------------------------
 
 --
@@ -60,7 +67,8 @@ CREATE TABLE `carrybazi_user` (
 CREATE TABLE `carrybazi_userinfo` (
   `userid` int(11) NOT NULL,
   `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `updateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -98,7 +106,7 @@ ALTER TABLE `carrybazi_talk`
 -- 使用資料表 AUTO_INCREMENT `carrybazi_user`
 --
 ALTER TABLE `carrybazi_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- 已匯出資料表的限制(Constraint)
 --

@@ -1,5 +1,12 @@
 var BaziPhoto = angular.module('BaziPhoto',['ngWebSocket']);
 
+BaziPhoto.controller('MainController', ['$scope', function($scope){
+    $scope.logout = function()
+    {
+
+    }
+}]);
+
 //right click
 BaziPhoto.directive('ngRightClick', function($parse) {
     return function(scope, element, attrs) {

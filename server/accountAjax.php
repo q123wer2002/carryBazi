@@ -13,7 +13,7 @@ include_once "../include/baziMain.php";
 
 switch( $method ){
 	case "register": //註冊會員
-		$userEmail = $post['userEmail']
+		$userEmail = $post['userEmail'];
 		$userPwd = $post['userPwd'];
 		$userType = $post['userType'];
 		$userName = $post['userName'];
@@ -60,7 +60,7 @@ switch( $method ){
 	break;
 
 	case "login": //登入
-		$userEmail = $post['userEmail']
+		$userEmail = $post['userEmail'];
 		$userPwd = $post['userPwd'];
 		
 		$sqltmp = "SELECT * FROM carrybazi_user WHERE account='".$userEmail."'";
@@ -70,7 +70,11 @@ switch( $method ){
 
 		if( empty($BPhotoObj->resultAry['checkUser']) == true ){
 			//means this user is already registered
-			$resultAry = array( "result" => "success", "dataCode" => $ENUM_accountErrorCode['noUser'] );
+			$resultAry = array( 
+				"result"	=>	"success", 
+				"dataCode"	=>	$ENUM_accountErrorCode['noUser']
+			);
+
 			print_r( json_encode($resultAry) );
 
 			unset( $BPhotoObj->resultAry['checkUser'] );
@@ -78,9 +82,14 @@ switch( $method ){
 			break;
 		}
 
-		if( md5($userPwd) != $BPhotoObj->resultAry['checkUser'][0]['password'] ){
+		if( $userPwd != $BPhotoObj->resultAry['checkUser'][0]['password'] ){ 
+//md5($userPwd) != $BPhotoObj->resultAry['checkUser'][0]['password'] ){
 			//means this user is already registered
-			$resultAry = array( "result" => "success", "dataCode" => $ENUM_accountErrorCode['pwdError'] );
+			$resultAry = array(
+				"result"	=>	"success", 
+				"dataCode"	=>	$ENUM_accountErrorCode['pwdError'],
+			);
+
 			print_r( json_encode($resultAry) );
 
 			unset( $BPhotoObj->resultAry['checkUser'] );
