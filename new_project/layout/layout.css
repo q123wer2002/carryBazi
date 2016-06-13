@@ -1,93 +1,87 @@
 body{margin: 0;padding: 0;width: 100%;height: auto;margin: auto;color: #6b7485;
 font-family: '文泉驛微米黑 Regular', '文泉驛微米黑','Arial Negreta cursiva', 'Arial','微軟正黑體';-webkit-font-smoothing:antialiased;font-size: 15px;}
 span{font-size: 15px;}
-a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video{margin: 0;padding: 0;border: 0;transition:opacity .2s ease,color .2s ease,background .2s ease,box-shadow .2s ease,border .2s ease;font-family: '微軟正黑體';font-weight: 400;}
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video{
+	margin: 0;padding: 0;border: 0;transition:opacity .2s ease,color .2s ease,background .2s ease,box-shadow .2s ease,border .2s ease;font-family: '微軟正黑體';font-weight: 400;
+}
  *:focus { outline: none; }
 a{text-decoration: none;}
+
 .limitWebView{width: 1024px;margin: auto;}
 
+/* top */
+	.topDiv{
+		width:90%;
+		padding:10px 5%;
+		height:50px;
+		/*background-color: rgba(255,255,255,0.8);*/
+		background-color: #000000;
+		margin: 0;
+		z-index: 5;
+	}
+	.topDiv .status{
+		color: #ffffff;
+		float: left;
+	}
+	.topDiv .option{
+		float: right;
+	}
+	.topDiv .option a{
+		color: #ffffff;
+		margin: 10px 10px;
+		display: inline-block;
+	}
+	.topDiv .option .photographer_in{
+		border: solid 1px #ffffff;
+		border-radius: 3px;
+		padding: 10px 7px;
+	}
+/* body */
+	.bodyDiv{
+		min-height:500px;
+	}
+/* footer */
+	.footerDiv{
+		width:90%;
+		padding:10px 5%;
+		height:300px;
+		background-color: rgba(114,112,113,0.8);
+		margin: 0;
+		z-index: 5;
+		text-align: center;
+	}
+	.footerDiv .option {
 
-.guide {	
-	width:100%;
-	height:100%;
-	display: block;
-	background: #33CCFF;
-}
-.guide div{
-	width:25%;
-	height:80%;
-	border: solid 1px #ffffff;
-	display: inline-block;
-	margin: 5% -2.5% 0 7.5%;
-}
+	}
+	.footerDiv .option a{
+		color: #ffffff;
+		margin: 10px 10px;
+		display: inline-block;
+		
+	}
+	.footerDiv .option #news,#contract,#common_problem,#manual {
+		padding-left: 20px;
+		border-left: solid 1px #ffffff;
+	}
+	.footerDiv .like h3, #facebook, #Instagram, #twitter{
+		color: #ffffff;
+		margin: 10px 10px;
+		display: inline-block;
+	}
+	.footerDiv .like a{
+		width:20px;
+		height:20px;
+		border-radius: 10px;
+	}
+	.footerDiv .like #facebook{
+		background-color: #3333CC;
 
-.top_banner{
-	width:90%;
-	padding:10px 5%;
-	height:70px;
-	background-color: #000000;
-	margin: 0;
-	z-index: 5;
-}
-.top_banner .status{
-	color: #ffffff;
-	float: left;
-}
-.top_banner .option{
-	float: right;
-}
-.top_banner .option a{
-	color: #ffffff;
-	margin: 10px 10px;
-	display: inline-block;
-}
-.top_banner .option .photographer_in{
-	border: solid 1px #ffffff;
-	border-radius: 3px;
-	padding: 10px 7px;
-}
+	}
+	.footerDiv .like #Instagram{
+		background-color: #CC3333;
 
-.foot_banner{
-	width:90%;
-	padding:10px 5%;
-	height:100px;
-	background-color: #000000;
-	margin: 0;
-	z-index: 5;
-	text-align: center;
-}
-.foot_banner .option {
+	}
+	.footerDiv .like #twitter{
+		background-color: #00CC33;
 
-}
-.foot_banner .option a{
-	color: #ffffff;
-	margin: 10px 10px;
-	display: inline-block;
-	
-}
-.foot_banner .option #news,#contract,#common_problem,#manual {
-	padding-left: 20px;
-	border-left: solid 1px #ffffff;
-}
-.foot_banner .like h3, #facebook, #Instagram, #twitter{
-	color: #ffffff;
-	margin: 10px 10px;
-	display: inline-block;
-}
-.foot_banner .like a{
-	width:20px;
-	height:20px;
-	border-radius: 10px;
-}
-.foot_banner .like #facebook{
-	background-color: #3333CC;
-
-}
-.foot_banner .like #Instagram{
-	background-color: #CC3333;
-
-}
-.foot_banner .like #twitter{
-	background-color: #00CC33;
-
-}
+	}
