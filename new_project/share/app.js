@@ -9,11 +9,17 @@ CarryBaziPhoto.config(['$routeProvider', function ($routeProvider) {
             controller: 'indexController',
             templateUrl: 'index/index.html'
         })
+    .when('/case',
+        {
+            controller: 'caseController',
+            templateUrl: 'case/case.html'
+        })
     .when('/userInfo',
         {
             controller: 'userInfoController',
             templateUrl: 'userInfo/index.html'
         })
+
     .otherwise({ redirectTo: '/' });
 
 }]);
