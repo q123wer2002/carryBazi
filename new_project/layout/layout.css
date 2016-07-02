@@ -38,6 +38,7 @@ a{text-decoration: none;}
 	}
 /* body */
 	.bodyDiv{
+		width: 100%;
 		min-height:500px;
 	}
 /* footer */
