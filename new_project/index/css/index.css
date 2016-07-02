@@ -121,3 +121,20 @@
 	width: 100%;
 	height: 10%;
 }
+
+.fifth{
+	text-align: center;
+	width:100%;
+	height:100%;
+	display: block;
+	background: #7FFFD4;
+}
+.fifth .step{
+	width: 20%;
+	height: 60%;
+	margin-top: 10%;
+	margin-left: 10%;
+	border: 1px solid #ffffff;
+	border-radius: 5px;
+	display: inline-block;
+}
