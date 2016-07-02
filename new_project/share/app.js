@@ -19,6 +19,11 @@ CarryBaziPhoto.config(['$routeProvider', function ($routeProvider) {
             controller: 'themeController',
             templateUrl: 'theme/theme.html'
         })
+    .when('/special',
+        {
+            controller: 'specialController',
+            templateUrl: 'special/special.html'
+        })
     .when('/userInfo',
         {
             controller: 'userInfoController',
